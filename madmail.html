@@ -52,15 +52,15 @@
       </label>
       <nav class="site-nav" aria-label="اصلی">
         <a href="index.html">خانه</a>
-        <a href="how.html">کارکرد</a>
-        <a href="guides.html">آموزش</a>
-        <a href="faq.html">پرسش‌ها</a>
-        <a href="relays.html">رله‌ها</a>
-        <a href="features.html">قابلیت‌ها</a>
         <a href="downloads.html">دانلود</a>
-        <a href="bots-apps.html">ربات‌ها</a>
-        <a href="offline.html">قطعی</a>
+        <a href="guides.html">آموزش</a>
+        <a href="how.html">ایمیل و رمزنگاری</a>
+        <a href="features.html">امکانات</a>
+        <a href="bots-apps.html">مینی‌اپ و ربات</a>
+        <a href="relays.html">رله‌ها</a>
+        <a href="offline.html">قطعی اینترنت</a>
         <a href="madmail.html" aria-current="page">مدمیل</a>
+        <a href="faq.html">پرسش‌ها</a>
         <a href="sources.html">منابع</a>
       </nav>
     </div>
@@ -75,12 +75,17 @@
         </ol>
       </nav>
       <h1>مدمیل: رله دلتاچت روی سرور خودتان</h1>
-      <p>مدمیل (Madmail) یک رله برای دلتاچت است که با زبان Rust نوشته شده و به‌صورت یک فایل اجرایی واحد نصب می‌شود. SMTP، IMAP، اجبار رمزنگاری، پیام فوری، TURN برای تماس و Shadowsocks برای شبکه‌های محدود همه داخل همان یک فایل است. نسخه فعلی سری v2 است. در برنامه فارسی به رله می‌گویند گذرگاه. کد و راهنما: <a href="https://github.com/themadorg/madmail">github.com/themadorg/madmail</a></p>
+      <p>مدمیل (Madmail) یک رله (در برنامه فارسی: گذرگاه) برای دلتاچت است که با زبان Rust نوشته شده و به‌صورت یک فایل اجرایی واحد نصب می‌شود. SMTP، IMAP، الزام رمزنگاری، رساندن فوری پیام، TURN برای تماس و Shadowsocks برای شبکه‌های محدود، همه در همین یک فایل است. نسخه فعلی از سری ۲ است (آخرین انتشار: v2.30.5، ۱۴ مهر ۱۴۰۵). روی لینوکس و ویندوز اجرا می‌شود. کد و راهنما: <a href="https://github.com/themadorg/madmail">github.com/themadorg/madmail</a></p>
     </header>
+
+    <section class="prose" id="who">
+      <h2>مدمیل برای چه کسی است؟</h2>
+      <p>برای کسی که می‌خواهد برای خانواده، دوستان، یک محله یا یک سازمان رله دلتاچت راه بیندازد، به‌خصوص وقتی اینترنت بین‌الملل قطع است. کاربر عادی لازم نیست سرور راه بیندازد؛ کافی است رله داخلی را به نمایه‌اش اضافه کند (<a href="offline.html">صفحه قطعی اینترنت</a>).</p>
+    </section>
 
     <section class="prose" id="needs">
       <h2>چه چیزی لازم است</h2>
-      <p>یک سرور لینوکسی (VPS داخلی یا رایانه همیشه روشن) با IP ثابت که کاربرانش به آن دسترسی دارند؛ دامنه اختیاری است. پورت‌های ایمیل (25، 465، 587، 993) و 443، و برای گواهی Let's Encrypt پورت 80.</p>
+      <p>یک سرور لینوکسی یا ویندوزی (VPS داخلی یا رایانه همیشه‌روشن) با IP ثابت که کاربران به آن دسترسی داشته باشند؛ دامنه اختیاری است. پورت‌های 25، 465، 587، 993 و 443 باید باز باشند و برای گواهی Let's Encrypt پورت 80 هم لازم است.</p>
     </section>
 
     <section class="prose" id="get">
@@ -88,44 +93,50 @@
       <pre><code>ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
 curl -fsSL "https://github.com/themadorg/madmail/releases/latest/download/madmail-linux-${ARCH}" -o madmail
 chmod +x madmail</code></pre>
-      <p>در قطعی اینترنت، گیت‌هاب در دسترس نیست. فایل را از قبل بگیرید و روی سرور نگه دارید.</p>
+      <p>در قطعی اینترنت گیت‌هاب در دسترس نیست؛ فایل را از قبل دانلود کنید و روی سرور نگه دارید.</p>
     </section>
 
     <section class="prose" id="ip-self">
-      <h2>حالت ۱، فقط IP با گواهی خودامضا</h2>
-      <p>این حالت برای شبکه داخلی و قطعی مناسب است.</p>
+      <h2>حالت ۱: فقط IP، با گواهی خودامضا</h2>
+      <p>مناسب شبکه داخلی و زمان قطعی، چون به اینترنت نیاز ندارد.</p>
       <pre><code>sudo ./madmail install --simple --ip YOUR_IP --lang en
 sudo systemctl enable madmail
 sudo systemctl start madmail</code></pre>
-      <p>کاربران ممکن است یک بار هشدار گواهی ببینند. گواهی را فقط برای همین سرور بپذیرند.</p>
+      <p>کاربران ممکن است هشدار گواهی ببینند و باید گواهی را فقط برای همین سرور بپذیرند (در دلتاچت: گزینه «پذیرفتن گواهی نامعتبر» در تنظیمات پیشرفته نمایه).</p>
     </section>
 
     <section class="prose" id="ip-le">
-      <h2>حالت ۲، IP با گواهی معتبر Let's Encrypt</h2>
-      <p>به اینترنت و پورت 80 نیاز دارد. تمدید گواهی حدود ۶ روزه است.</p>
+      <h2>حالت ۲: فقط IP، با گواهی معتبر Let's Encrypt</h2>
+      <p>به اینترنت و پورت 80 نیاز دارد و گواهی تقریباً هر ۶ روز خودکار تمدید می‌شود؛ پس در قطعی کامل اینترنت تمدید نمی‌شود.</p>
       <pre><code>sudo ./madmail install --simple --ip YOUR_IP --auto-ip-cert --acme-email you@example.com --lang en</code></pre>
     </section>
 
     <section class="prose" id="domain">
-      <h2>حالت ۳، با دامنه</h2>
+      <h2>حالت ۳: با دامنه</h2>
       <pre><code>sudo ./madmail install --simple --domain mail.example.org --acme-email you@example.com --lang en</code></pre>
-      <p>در همه حالت‌ها YOUR_IP را با IP سرور و نشانی‌های نمونه را با نشانی واقعی خودتان عوض کنید.</p>
+      <p>در همه حالت‌ها YOUR_IP را با IP سرور و نشانی‌های نمونه را با نشانی واقعی خودتان عوض کنید. بعد از دستور install در حالت ۲ و ۳ هم دو دستور systemctl حالت ۱ را اجرا کنید.</p>
     </section>
 
     <section class="prose" id="after">
       <h2>بعد از نصب</h2>
-      <p>صفحه وب سرور را باز کنید؛ QR دعوت آن‌جاست. کاربران با اسکن همین QR نمایه می‌سازند یا آن را به‌عنوان رله دوم اضافه می‌کنند.</p>
+      <p>نشانی سرور (https://IP یا دامنه) را در مرورگر باز کنید؛ QR دعوت در همان صفحه است. کاربران با اسکن همین QR نمایه می‌سازند یا آن را به‌عنوان رله دوم اضافه می‌کنند.</p>
     </section>
 
     <section class="prose" id="shadowsocks">
       <h2>Shadowsocks</h2>
-      <p>مدمیل برای شبکه‌های محدود حالت Shadowsocks دارد. راه‌اندازی آن را از راهنمای Admin &amp; CLI مخزن بخوانید و لینک ss:// را به کاربران بدهید تا در تنظیمات ← پیشرفته ← پروکسی وارد کنند.</p>
+      <p>مدمیل برای شبکه‌های محدود حالت Shadowsocks دارد. روش راه‌اندازی در راهنمای Admin &amp; CLI مخزن آمده است؛ لینک ss:// ساخته‌شده را به کاربران بدهید تا در تنظیمات ← پیشرفته ← پروکسی وارد کنند.</p>
+    </section>
+
+    <section class="prose" id="update">
+      <h2>به‌روزرسانی</h2>
+      <p>مدمیل دستور به‌روزرسانی با بررسی امضا دارد؛ روش آن در راهنمای شروع سریع مخزن آمده است. پیش از به‌روزرسانی از پوشه داده سرور پشتیبان بگیرید.</p>
     </section>
 
     <section class="prose" id="warning">
       <h2>هشدار</h2>
-      <p>گرداننده رله متن پیام‌ها را نمی‌بیند، ولی IP کاربران و زمان اتصال را می‌بیند. اگر سرور داخلی است، این داده در دسترس ارائه‌دهنده سرور هم هست. سرور را به‌روز نگه دارید. طبق خود مخزن، بیشتر کد با کمک هوش مصنوعی نوشته شده و استفاده از آن با مسئولیت خودتان است.</p>
+      <p>گرداننده رله متن پیام‌ها را نمی‌بیند، ولی IP کاربران و زمان اتصال‌ها را می‌بیند؛ اگر سرور داخل ایران است، ارائه‌دهنده سرور هم به این داده دسترسی دارد. سرور را همیشه به‌روز نگه دارید. به گفته خود مخزن، بیشتر کد با کمک هوش مصنوعی و زیر نظر انسان نوشته شده و استفاده از آن با مسئولیت خودتان است.</p>
       <ul class="links">
+        <li><a href="https://github.com/themadorg/madmail/blob/main/docs/guide/recipes/server-domains_fa.md">راهنمای فارسی دامنه‌ها</a></li>
         <li><a href="https://github.com/themadorg/madmail/blob/main/README.md">README</a></li>
         <li><a href="https://github.com/themadorg/madmail/blob/main/docs/project/user-guide/02-quick-start.md">شروع سریع</a></li>
         <li><a href="https://github.com/themadorg/madmail/blob/main/docs/project/user-guide/11-deployment-ip-domain-certs.md">IP، دامنه و گواهی</a></li>
@@ -146,7 +157,7 @@ sudo systemctl start madmail</code></pre>
         <a href="https://delta.chat/fa/help">راهنمای رسمی</a>
         <a href="https://support.delta.chat/">انجمن پشتیبانی</a>
         <a href="https://chatmail.at/">چت‌میل</a>
-        <a href="https://delta.sudoshz.ir/">سرور شیرازلینوکس</a>
+        <a href="https://delta.sudoshz.ir/">رله داخلی شیرازلینوکس</a>
         <a href="guides.html">آموزش</a>
         <a href="faq.html">پرسش‌ها</a>
         <a href="license.html">پروانه AGPL</a>
