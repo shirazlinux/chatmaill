@@ -22,13 +22,18 @@
   }
   if (stored === "dark" || stored === "light") {
     root.setAttribute("data-theme", stored);
-  } else if (!root.getAttribute("data-theme")) {
-    root.setAttribute("data-theme", "light");
   }
   root.classList.add("js");
 
   function isDark() {
-    return root.getAttribute("data-theme") !== "light";
+    var choice = root.getAttribute("data-theme");
+    if (choice === "dark") {
+      return true;
+    }
+    if (choice === "light") {
+      return false;
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -55,104 +60,27 @@
       });
     }
 
-    var header = document.querySelector(".site-header");
-    function syncHeader() {
-      if (!header) {
-        return;
-      }
-      root.style.setProperty("--header", header.offsetHeight + "px");
-    }
-    syncHeader();
-    window.addEventListener("resize", syncHeader);
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var nodes = document.querySelectorAll(".reveal");
 
-    var toggle = document.getElementById("nav-toggle");
-    var navBtn = document.querySelector(".nav-btn");
-    if (toggle && navBtn) {
-      function syncNav() {
-        navBtn.setAttribute("aria-expanded", toggle.checked ? "true" : "false");
-      }
-      syncNav();
-      toggle.addEventListener("change", syncNav);
-    }
-
-    if (document.querySelector(".faq") && !document.querySelector(".toc")) {
-      var toc = document.createElement("ul");
-      toc.className = "toc";
-      document.querySelectorAll("main section[id] > h2").forEach(function (heading) {
-        var li = document.createElement("li");
-        var link = document.createElement("a");
-        link.href = "#" + heading.parentElement.id;
-        link.textContent = heading.textContent;
-        li.appendChild(link);
-        toc.appendChild(li);
-      });
-      var head = document.querySelector(".page-head");
-      if (head && toc.childElementCount) {
-        head.insertAdjacentElement("afterend", toc);
-      }
-    }
-
-    var tocLinks = document.querySelectorAll(".toc a[href^='#']");
-    if (tocLinks.length && "IntersectionObserver" in window) {
-      var byId = {};
-      tocLinks.forEach(function (link) {
-        byId[link.getAttribute("href").slice(1)] = link;
-      });
-      var current = null;
-      var tocObserver = new IntersectionObserver(function (entries) {
+    if (!reduce && "IntersectionObserver" in window) {
+      var seen = 0;
+      var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) {
             return;
           }
-          var link = byId[entry.target.id];
-          if (!link || link === current) {
-            return;
-          }
-          if (current) {
-            current.classList.remove("is-current");
-            current.removeAttribute("aria-current");
-          }
-          link.classList.add("is-current");
-          link.setAttribute("aria-current", "location");
-          current = link;
+          entry.target.style.animationDelay = Math.min(seen, 6) * 40 + "ms";
+          entry.target.classList.add("is-in");
+          seen += 1;
+          observer.unobserve(entry.target);
         });
-      }, { rootMargin: "-30% 0px -60% 0px", threshold: 0 });
-      Object.keys(byId).forEach(function (id) {
-        var target = document.getElementById(id);
-        if (target) {
-          tocObserver.observe(target);
-        }
+      }, { rootMargin: "0px 0px -6% 0px", threshold: 0.08 });
+
+      nodes.forEach(function (node) {
+        observer.observe(node);
       });
     }
-
-    document.querySelectorAll("pre").forEach(function (pre) {
-      if (pre.querySelector(".copy-btn")) {
-        return;
-      }
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "copy-btn";
-      btn.textContent = "رونوشت";
-      btn.setAttribute("aria-label", "رونوشت");
-      btn.addEventListener("click", function () {
-        var code = pre.querySelector("code");
-        var text = (code ? code.textContent : pre.textContent) || "";
-        function done() {
-          btn.textContent = "کپی شد";
-          window.setTimeout(function () {
-            btn.textContent = "رونوشت";
-          }, 1600);
-        }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(done).catch(function () {
-            btn.textContent = "نشد";
-          });
-          return;
-        }
-        btn.textContent = "نشد";
-      });
-      pre.appendChild(btn);
-    });
 
     var items = document.querySelectorAll(".faq details");
     items.forEach(function (item) {
