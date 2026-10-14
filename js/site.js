@@ -22,18 +22,13 @@
   }
   if (stored === "dark" || stored === "light") {
     root.setAttribute("data-theme", stored);
+  } else if (!root.getAttribute("data-theme")) {
+    root.setAttribute("data-theme", "dark");
   }
   root.classList.add("js");
 
   function isDark() {
-    var choice = root.getAttribute("data-theme");
-    if (choice === "dark") {
-      return true;
-    }
-    if (choice === "light") {
-      return false;
-    }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return root.getAttribute("data-theme") !== "light";
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -60,27 +55,33 @@
       });
     }
 
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var nodes = document.querySelectorAll(".reveal");
-
-    if (!reduce && "IntersectionObserver" in window) {
-      var seen = 0;
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) {
-            return;
-          }
-          entry.target.style.animationDelay = Math.min(seen, 6) * 40 + "ms";
-          entry.target.classList.add("is-in");
-          seen += 1;
-          observer.unobserve(entry.target);
-        });
-      }, { rootMargin: "0px 0px -6% 0px", threshold: 0.08 });
-
-      nodes.forEach(function (node) {
-        observer.observe(node);
+    document.querySelectorAll("pre").forEach(function (pre) {
+      if (pre.querySelector(".copy-btn")) {
+        return;
+      }
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "copy-btn";
+      btn.textContent = "رونوشت";
+      btn.addEventListener("click", function () {
+        var code = pre.querySelector("code");
+        var text = (code ? code.textContent : pre.textContent) || "";
+        function done() {
+          btn.textContent = "کپی شد";
+          window.setTimeout(function () {
+            btn.textContent = "رونوشت";
+          }, 1600);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(function () {
+            btn.textContent = "نشد";
+          });
+          return;
+        }
+        btn.textContent = "نشد";
       });
-    }
+      pre.appendChild(btn);
+    });
 
     var items = document.querySelectorAll(".faq details");
     items.forEach(function (item) {
