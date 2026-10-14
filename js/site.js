@@ -23,7 +23,7 @@
   if (stored === "dark" || stored === "light") {
     root.setAttribute("data-theme", stored);
   } else if (!root.getAttribute("data-theme")) {
-    root.setAttribute("data-theme", "dark");
+    root.setAttribute("data-theme", "light");
   }
   root.classList.add("js");
 
@@ -55,6 +55,76 @@
       });
     }
 
+    var header = document.querySelector(".site-header");
+    function syncHeader() {
+      if (!header) {
+        return;
+      }
+      root.style.setProperty("--header", header.offsetHeight + "px");
+    }
+    syncHeader();
+    window.addEventListener("resize", syncHeader);
+
+    var toggle = document.getElementById("nav-toggle");
+    var navBtn = document.querySelector(".nav-btn");
+    if (toggle && navBtn) {
+      function syncNav() {
+        navBtn.setAttribute("aria-expanded", toggle.checked ? "true" : "false");
+      }
+      syncNav();
+      toggle.addEventListener("change", syncNav);
+    }
+
+    if (document.querySelector(".faq") && !document.querySelector(".toc")) {
+      var toc = document.createElement("ul");
+      toc.className = "toc";
+      document.querySelectorAll("main section[id] > h2").forEach(function (heading) {
+        var li = document.createElement("li");
+        var link = document.createElement("a");
+        link.href = "#" + heading.parentElement.id;
+        link.textContent = heading.textContent;
+        li.appendChild(link);
+        toc.appendChild(li);
+      });
+      var head = document.querySelector(".page-head");
+      if (head && toc.childElementCount) {
+        head.insertAdjacentElement("afterend", toc);
+      }
+    }
+
+    var tocLinks = document.querySelectorAll(".toc a[href^='#']");
+    if (tocLinks.length && "IntersectionObserver" in window) {
+      var byId = {};
+      tocLinks.forEach(function (link) {
+        byId[link.getAttribute("href").slice(1)] = link;
+      });
+      var current = null;
+      var tocObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          var link = byId[entry.target.id];
+          if (!link || link === current) {
+            return;
+          }
+          if (current) {
+            current.classList.remove("is-current");
+            current.removeAttribute("aria-current");
+          }
+          link.classList.add("is-current");
+          link.setAttribute("aria-current", "location");
+          current = link;
+        });
+      }, { rootMargin: "-30% 0px -60% 0px", threshold: 0 });
+      Object.keys(byId).forEach(function (id) {
+        var target = document.getElementById(id);
+        if (target) {
+          tocObserver.observe(target);
+        }
+      });
+    }
+
     document.querySelectorAll("pre").forEach(function (pre) {
       if (pre.querySelector(".copy-btn")) {
         return;
@@ -63,6 +133,7 @@
       btn.type = "button";
       btn.className = "copy-btn";
       btn.textContent = "رونوشت";
+      btn.setAttribute("aria-label", "رونوشت");
       btn.addEventListener("click", function () {
         var code = pre.querySelector("code");
         var text = (code ? code.textContent : pre.textContent) || "";
