@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ایمیل چیست و دلتاچت چطور کار می‌کند</title>
+  <meta name="description" content="ایمیل چیست، کلید GPG چطور قفل می‌کند، و رمز دلتاچت با OpenPGP و SecureJoin چه فرقی دارد.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://chatmaill.ir/how.html">
+  <link rel="alternate" hreflang="fa" href="https://chatmaill.ir/how.html">
+  <link rel="alternate" hreflang="x-default" href="https://chatmaill.ir/how.html">
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="چت‌میل و دلتاچت">
+  <meta property="og:title" content="ایمیل چیست و دلتاچت چطور کار می‌کند">
+  <meta property="og:description" content="ایمیل چیست، کلید GPG چطور قفل می‌کند، و رمز دلتاچت با OpenPGP و SecureJoin چه فرقی دارد.">
+  <meta property="og:url" content="https://chatmaill.ir/how.html">
+  <meta property="og:image" content="https://chatmaill.ir/assets/apple-touch-icon.png">
+  <meta property="og:image:alt" content="نشان دلتاچت">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ایمیل چیست و دلتاچت چطور کار می‌کند">
+  <meta name="twitter:description" content="ایمیل چیست، کلید GPG چطور قفل می‌کند، و رمز دلتاچت با OpenPGP و SecureJoin چه فرقی دارد.">
+  <meta name="twitter:image" content="https://chatmaill.ir/assets/apple-touch-icon.png">
+  <link rel="sitemap" type="application/xml" title="نقشه سایت" href="sitemap.xml">
+  <meta name="theme-color" content="#364e59" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1418" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="fonts/Vazirmatn-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="js/site.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"ایمیل چیست و دلتاچت چطور کار می‌کند","description":"ایمیل چیست، کلید GPG چطور قفل می‌کند، و رمز دلتاچت با OpenPGP و SecureJoin چه فرقی دارد.","inLanguage":"fa","isPartOf":{"@type":"WebSite","name":"چت‌میل و دلتاچت"}}]}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#content">رفتن به محتوا</a>
+  <header class="site-header">
+    <div class="header-bar">
+      <a class="brand" href="index.html">
+        <img class="logo" src="assets/logo.svg" alt="">
+        <span>چت‌میل و دلتاچت</span>
+      </a>
+      <button type="button" class="theme-btn" id="theme-btn" aria-pressed="false" aria-label="تم تاریک">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14.5 2.5a8.5 8.5 0 1 0 7 12.5 7 7 0 1 1-7-12.5z"/></svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.1 5.1l1.6 1.6M17.3 17.3l1.6 1.6M18.9 5.1l-1.6 1.6M6.7 17.3l-1.6 1.6"/></svg>
+      </button>
+      <input class="nav-toggle" type="checkbox" id="nav-toggle">
+      <label class="nav-btn" for="nav-toggle">
+        <span class="sr-only">باز و بسته کردن منو</span>
+        <span></span><span></span><span></span>
+      </label>
+      <nav class="site-nav" aria-label="اصلی">
+        <a href="index.html">خانه</a>
+        <a href="how.html" aria-current="page">کارکرد</a>
+        <a href="guides.html">آموزش</a>
+        <a href="faq.html">پرسش‌ها</a>
+        <a href="relays.html">رله‌ها</a>
+        <a href="features.html">قابلیت‌ها</a>
+        <a href="downloads.html">دانلود</a>
+        <a href="bots-apps.html">ربات‌ها</a>
+        <a href="sources.html">منابع</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="wrap">
+    <header class="page-head prose">
+      <nav class="crumb" aria-label="مسیر">
+        <ol>
+          <li><a href="index.html">خانه</a></li>
+          <li aria-current="page">کارکرد</li>
+        </ol>
+      </nav>
+      <figure class="illu-frame">
+        <img class="shot" src="assets/lesson/chatmail-drawn.jpg" width="640" height="480" alt="طرح رسمی چت‌میل: علامت ایمیل داخل حباب گفتگو">
+      </figure>
+      <h1>ایمیل و کارکرد دلتاچت</h1>
+      <p>دلتاچت صندوق ایمیل را جلوی چشم نمی‌گذارد، ولی پیام را مثل نامه جابه‌جا می‌کند. اول خود ایمیل، بعد کلید GPG، بعد رمز خود دلتاچت. دکمه‌های نصب در <a href="guides.html">آموزش</a> است.</p>
+    </header>
+
+    <section class="prose" id="mail">
+      <h2>ایمیل چیست</h2>
+      <p>نشانی ایمیل دو تکه دارد. قبل از @ نام است و بعدش دامنه. نمونه ساختگی: <code>sara@example.org</code>. دامنه می‌گوید نامه باید برود پیش کدام سرور.</p>
+      <p>نامه دو بخش دارد. پاکت می‌گوید از کی به کی. متن همان حرف است، و اگر فایلی چسبانده باشید همان پیوست. فرستادن با SMTP است. گرفتن با IMAP. سرور فرستنده نامه را می‌رساند به سرور دامنه گیرنده. تا برنامه گیرنده آن را بردارد، نامه در صندوق می‌ماند.</p>
+      <ol class="route" aria-label="مسیر یک نامه، به ترتیب">
+        <li>نویسنده</li>
+        <li>سرور فرستنده</li>
+        <li>سرور گیرنده</li>
+        <li>صندوق</li>
+      </ol>
+      <p>برنامه ایمیل معمولی همین صندوق را فهرست می‌کند و موضوع و فرستنده و متن را جدا نشان می‌دهد. اگر نامه رمز نشده باشد، سرور هر دو طرف متن را می‌خواند. مسیر بین سرورها معمولا با TLS بسته است. این رمز راه است، رمز بین دو نفر نیست.</p>
+    </section>
+
+    <section class="prose" id="gpg">
+      <h2>کلید GPG چطور قفل می‌کند</h2>
+      <p>OpenPGP استاندارد قفل کردن نامه است. GnuPG، که به آن GPG هم می‌گویند، یک برنامه خط فرمان برای همین استاندارد است. دلتاچت از خود GnuPG استفاده نمی‌کند. این بخش فقط خود قفل را می‌گوید، تا بخش بعدی معلوم شود دلتاچت کدام قسمت را برداشته و کدام را خودش انجام می‌دهد.</p>
+      <div class="key-pair">
+        <article>
+          <h3>کلید عمومی</h3>
+          <p>این یکی را می‌شود داد دست بقیه. هر کس با کلید عمومی شما نامه را قفل می‌کند.</p>
+        </article>
+        <article>
+          <h3>کلید خصوصی</h3>
+          <p>این یکی پیش خودتان می‌ماند. فقط همین کلید قفل را باز می‌کند. اگر لو برود، نامه‌های قبلی هم که با جفتش قفل شده‌اند خوانده می‌شوند.</p>
+        </article>
+      </div>
+      <p>پس برای فرستادن یک حرف خصوصی، فرستنده کلید عمومی گیرنده را لازم دارد. قفل با کلید عمومی گیرنده زده می‌شود. باز شدن فقط با کلید خصوصی گیرنده است. سرور وسط راه متن را ندارد، به شرطی که واقعا با همین کلید قفل شده باشد و کلید عوض نشده باشد.</p>
+      <p>امضا برعکس قفل است. با کلید خصوصی خودتان می‌زنید تا معلوم شود نامه از شما آمده. بقیه با کلید عمومی شما چک می‌کنند.</p>
+      <p>در ایمیل کلاسیک این کلیدها را با دست رد و بدل می‌کنند. گاهی از یک سرور کلید عمومی می‌گیرند. برای اینکه کلید مال خود آدم باشد، اثر انگشت را کنار هم مقایسه می‌کنند. اگر کلید اشتباهی را عمومی حساب کنید، نامه را برای شخص دیگری قفل کرده‌اید.</p>
+    </section>
+
+    <section class="prose" id="dc-crypto">
+      <h2>رمز دلتاچت</h2>
+      <p>دلتاچت همان خانواده OpenPGP را به کار می‌برد، ولی یک زیرمجموعه امن از آن را. پیاده‌سازی‌اش کتابخانه Rust به نام rPGP است، نه GnuPG. همین کتابخانه در ۲۰۱۹ و ۲۰۲۴ جدا بررسی شده. امضای جدا را رمز امن حساب نمی‌کند. کل پیام باید رمز و امضا شده باشد، از جمله پیوست و نام فایل.</p>
+      <figure class="illu-frame">
+        <img class="shot" src="assets/lesson/encryption.png" width="900" height="600" alt="دسکتاپ دلتاچت بدون قفل روی پیام، چون رمز پیش‌فرض است">
+      </figure>
+      <p>موقع ساخت نمایه، برنامه جفت کلید را روی دستگاه می‌سازد. کلید خصوصی همان‌جا می‌ماند. لازم نیست کلید قدیمی‌تان را وارد کنید و برنامه هم مدیریت دستی کلید را پیشنهاد نمی‌کند. سرور کلید عمومی را هم نمی‌پرسد.</p>
+      <p>Autocrypt سطح ۱ رمز را بین دو برنامه ایمیل خودکار راه می‌اندازد، ولی فقط در برابر کسی که نامه را در راه گوش می‌دهد. اگر کسی وسط راه بتواند سربرگ را عوض کند، می‌تواند کلید را جابه‌جا کند. SecureJoin برای همین است. QR یا لینک دعوت، تنظیم کلید را از یک راه دوم رد و بدل می‌کند تا رله نتواند کلید را وسط مسیر عوض کند. بعد از این وصل شدن، Autocrypt رمز را بین مخاطب‌ها و اعضای گروه نگه می‌دارد. معرفی یک مخاطب داخل گپ هم به بقیه همان کلید را می‌دهد.</p>
+      <figure class="illu-frame">
+        <img class="shot" src="assets/lesson/metadata.png" width="880" height="280" alt="سربرگ نامه روی رله: نشانی تصادفی، موضوع hidden recipients، بدنه رمزشده">
+      </figure>
+      <p>رله چت‌میل نامه رمزنشده را رد می‌کند. از نسخه ۲ قفل یا تیک سبز روی پیام نیست، چون رمز پیش‌فرض است. اگر نمایه ایمیل کلاسیک داشته باشید، نامه بی‌رمز با نماد نامه می‌آید.</p>
+      <p>در سربرگ نامه‌ای که رله می‌بیند، موضوع به‌جای متن گپ عبارت hidden recipients است و بدنه <code>pgp-encrypted</code> است. رله نشانی فرستنده و گیرنده را می‌بیند، که پیش‌فرض تصادفی است، و اندازه پیام را. اسم و تصویر و اعضای گروه داخل بخش رمزشده می‌ماند.</p>
+      <p>رازداری پیشرو و رمز پساکوانتوم هنوز در برنامه نیست. راهنمای رسمی هر دو را برای Autocrypt v2 نوشته و زمان پیاده‌سازی کامل را ۲۰۲۶ گذاشته. تا آن موقع، اگر کلید خصوصی لو برود و کسی نامه رمزشده را قبلا جمع کرده باشد، با همان کلید خوانده می‌شود. پرسش کوتاه‌تر در <a href="faq.html#crypto">بخش رمز</a> است.</p>
+    </section>
+
+    <section class="prose" id="deltachat">
+      <h2>دلتاچت روی همین نامه</h2>
+      <p>موقع ساخت نمایه، برنامه یک نشانی می‌سازد و کلید رمز را روی دستگاه شما نگه می‌دارد. شما رمز ایمیل را جایی یادداشت نمی‌کنید. اسم و تصویری که می‌گذارید برای مخاطب است، نه برای فرم ثبت‌نام سرور.</p>
+      <figure class="illu-frame">
+        <img class="shot" src="assets/lesson/create-profile.jpg" width="360" height="640" alt="صفحه ساخت نمایه: نام نمایشی، و دکمه استفاده از سرور دیگر">
+      </figure>
+      <p>چت‌میل رله‌ای است که برای گپ تنظیم شده. نشانی تصادفی می‌دهد، شماره تلفن نمی‌خواهد، نامه رمزنشده را قبول نمی‌کند، و بعد از رساندن نامه را برای آرشیو نگه نمی‌دارد. اگر دستگاه خاموش باشد نامه کمی آن‌جا می‌ماند و بعد پاک می‌شود.</p>
+      <p>روی نمایه چت‌میل نامه معمولی برمی‌گردد. طرف مقابل باید دلتاچت داشته باشد، یا برنامه‌ای که Autocrypt را بلد باشد. حرف با صندوق قدیمی فقط از نمایه ایمیل کلاسیک ممکن است و پایین‌تر جدا آمده.</p>
+    </section>
+
+    <section class="prose" id="path">
+      <h2>مسیر یک پیام</h2>
+      <ol class="route" aria-label="مسیر یک پیام دلتاچت، به ترتیب">
+        <li>برنامه شما<span>رمز می‌کند</span></li>
+        <li>رله شما<span>متن را نمی‌خواند</span></li>
+        <li>رله مخاطب<span>نگه نمی‌دارد</span></li>
+        <li>برنامه او<span>باز می‌کند</span></li>
+      </ol>
+      <ol class="plain-list">
+        <li>برنامه شما متن، پیوست و نام فایل را با هم رمز می‌کند.</li>
+        <li>نامه رمزشده با SMTP به رله شما می‌رود.</li>
+        <li>رله شما آن را به رله مخاطب می‌رساند. لازم نیست هر دو یک سرور داشته باشید. رله‌ها با هم کار می‌کنند.</li>
+        <li>برنامه مخاطب با IMAP نامه را برمی‌دارد و روی دستگاه خودش باز می‌کند.</li>
+      </ol>
+      <figure class="illu-frame">
+        <img class="shot" src="assets/lesson/relay-network.jpg" width="880" height="420" alt="طرح شبکه رله: آلیس و باب، هر کدام یک رله فرستنده، و چند نشانی در میانه">
+      </figure>
+      <p>رله متن را نمی‌خواند. جزئیات اینکه چه چیزی روی سرور می‌ماند در <a href="#dc-crypto">رمز دلتاچت</a> است.</p>
+    </section>
+
+    <section class="prose" id="keys">
+      <h2>QR در عمل</h2>
+      <p>اسکن QR یا لینک دعوت همان SecureJoin است که در <a href="#dc-crypto">بخش رمز</a> آمد. دو برنامه تنظیم کلید را رد و بدل می‌کنند. بعدش لازم نیست برای هر پیام کلید را با دست بفرستید.</p>
+      <p>قفل روی پیام، از نسخه ۲، دیگر نشان داده نمی‌شود. اگر نماد نامه دیدید، آن گپ از نمایه ایمیل کلاسیک است و بی‌رمز است.</p>
+    </section>
+
+    <section class="prose" id="classic">
+      <h2>ایمیل کلاسیک، جدا از چت‌میل</h2>
+      <p>می‌شود نمایه را روی یک نشانی ایمیل معمولی ساخت. مسیر در برنامه فارسی: نمایه تازه، سرور دیگر، استفاده از رایانامه کلاسیک به‌عنوان گذرگاه. این نمایه می‌تواند نامه بی‌رمز هم بفرستد و موضوع برایش جدا انتخاب می‌شود.</p>
+      <figure class="illu-frame">
+        <img class="shot" src="assets/lesson/emails.png" width="360" height="640" alt="گپ ایمیل کلاسیک در دلتاچت، با نماد نامه کنار نام">
+      </figure>
+      <figure class="illu-frame">
+        <img class="shot" src="assets/lesson/email-subject.png" width="640" height="400" alt="نوشتن نامه کلاسیک در دلتاچت، با فیلد موضوع">
+      </figure>
+      <p>همان نشانی را در برنامه یا سایت ایمیل دیگر باز نکنید. نامه رمزشده در صندوق می‌ماند، اعلان دو بار می‌آید، یا نامه اشتباهی پاک می‌شود. راهنمای رسمی می‌گوید این نشانی فقط مال کلاینت چت‌میل باشد.</p>
+      <p>ارائه‌دهنده ایمیل معمولی معمولا پوش لحظه‌ای چت‌میل را ندارد. برای حرف روزمره یک نمایه چت‌میل جدا بگذارید و نمایه کلاسیک را برای همان نامه‌های قدیمی نگه دارید. رله داخل ایران در <a href="relays.html">صفحه رله‌ها</a> است.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="fsf-mark" href="https://sudoshz.ir/what-is-free-software">
+        <img src="assets/fsf-logo.png" width="2588" height="2216" alt="">
+        <span>نرم‌افزار آزاد چیست</span>
+      </a>
+      <nav aria-label="منابع رسمی">
+        <a href="https://delta.chat/fa/help">راهنمای رسمی</a>
+        <a href="https://support.delta.chat/">انجمن پشتیبانی</a>
+        <a href="https://chatmail.at/">چت‌میل</a>
+        <a href="https://delta.sudoshz.ir/">سرور شیرازلینوکس</a>
+        <a href="guides.html">آموزش</a>
+        <a href="faq.html">پرسش‌ها</a>
+        <a href="license.html">پروانه AGPL</a>
+        <a href="license.html#jslicense-labels1" rel="jslicense">پروانه جاوااسکریپت</a>
+        <a href="sources.html">فهرست منابع</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
