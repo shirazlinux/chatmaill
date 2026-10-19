@@ -29,7 +29,8 @@ python3 -m http.server 8080
 - `sources.html` منابع
 - `license.html` پروانه AGPL و جدول جاوااسکریپت آزاد
 - `robots.txt` اجازه خزیدن صفحه‌ها، و بستن پوشه `files/` تا فایل نصب خزیده نشود
-- `sitemap.xml` ده صفحه HTML با نشانی مطلق chatmaill.ir
+- `sitemap.xml` دوازده صفحه HTML با نشانی مطلق chatmaill.ir
+- `404.html` صفحه خطای پیدا نشدن (از sitemap بیرون است)
 - `Dockerfile` و `nginx.conf` برای اجرای ایستا روی پاستا، پورت ۸۰۸۰
 - `COPYING` متن کامل AGPL-3.0
 - `css/style.css` استایل مشترک
